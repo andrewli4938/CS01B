@@ -1,0 +1,725 @@
+// NOTE; ALL CLASSES ARE WRITTEN IN SEPARATE FILES
+
+
+**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: CreditCardTransactionAnalayzer class contains the main method in which methods from Customer class are <br>
+ * called. It lists all of the customer information from his / her previous transactions. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class CreditCardTransactionAnalyzer
+{
+    public static void main(String[] args)
+    {
+        Customer customer = new Customer("Andrew Li", "1111111111111111",10000, 20); 
+        customer.readTransactions();
+        customer.reportTransactions();
+        customer.reportBankingCharges(); 
+        customer.reportRewardSummary();
+        customer.reportCurrentBalance();
+        
+    }
+}
+
+import java.io.*;
+import java.nio.file.*;
+import java.util.Arrays;
+import java.nio.charset.*;
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Customer class contains all the methods that report customer balances, total points earned from transactions, <br>
+ * total bank charges, and a listing of all of the customer's past transactions read from a text file. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public class Customer
+{ 
+    private static final int MAX_SIZE = 8; 
+    private String custName, credNum;
+    private double totalBal, rewardBal;
+    private Transaction[] transactionList; 
+    private Rewardable[] rewardsList; 
+    private static final String INPUT_FILE_LOCATION = "/Users/w.li/eclipse-workspace/CS1B/Assignments/Assignment02/TransactionsData.txt";
+    
+    // default constructor
+    public Customer()
+    {
+        custName = "John Doe";
+        credNum = "1111222233334444"; 
+        totalBal = 0; 
+        rewardBal = 1000; 
+        transactionList = new Transaction[MAX_SIZE]; 
+        rewardsList = new Rewardable[MAX_SIZE]; 
+    }
+    
+    // non-default constructors
+    public Customer(String name, String card, double balance, double points)
+    {
+        custName = name; 
+        credNum = card; 
+        totalBal = balance; 
+        rewardBal = points; 
+        transactionList = new Transaction[MAX_SIZE];
+        rewardsList = new Rewardable[MAX_SIZE]; 
+    }
+    
+    public void reportCurrentBalance()
+    {
+        System.out.print("\nBalance Summary for " + custName + " "); 
+        lastDigits(); 
+        System.out.println();
+        System.out.format("%-45s$%.2f\n", "Previous credit card balance", totalBal); 
+        double moneySpent = 0; 
+        for (Transaction transaction : transactionList)
+        {
+            moneySpent += transaction.getAmount(); 
+        }
+        totalBal = totalBal - moneySpent; 
+        System.out.format("%-45s$%.2f\n", "- Total money spent", moneySpent ); 
+        System.out.println("-----------------------------------------------------");
+        System.out.format("%-45s$%.2f\n", "Current Balance", totalBal); 
+    }
+    
+    public void reportRewardSummary()
+    {
+        double departmentPoints = 0;
+        double groceryPoints = 0; 
+        System.out.print("\nRewards Summary for " + custName + " " );
+        lastDigits(); 
+        System.out.println();
+        System.out.format("%-45s%.2f\n", "Previous Points Balance", rewardBal); 
+        
+        for (Transaction transaction : transactionList)
+        {
+            if (transaction instanceof Rewardable)
+            {
+                if (transaction instanceof DepartmentStoreTransaction)
+                {
+                    departmentPoints += ((Rewardable) transaction).earnPoints(); 
+                } else
+                {
+                    groceryPoints += ((Rewardable) transaction).earnPoints(); 
+                }
+            }
+        }
+        
+        System.out.format("%-45s%.2f\n", "+ Points earned on department stores", departmentPoints);
+        System.out.format("%-45s%.2f\n", "+ Points earned on grocery stores", groceryPoints); 
+        System.out.println("----------------------------------------------------------------");
+        System.out.format("%-45s%.2f\n", "Total Points Available for Redemption", groceryPoints + departmentPoints); 
+    }
+    
+    public void reportBankingCharges()
+    {
+        double bankCharges = 0; 
+        for (Transaction transaction : transactionList)
+        {
+            if (transaction instanceof BankTransaction)
+            {
+                bankCharges += ((BankTransaction) transaction).getCharge(); 
+            }
+        }
+        System.out.println("\nTotal bank charges are: $" + bankCharges);
+    }
+    
+    public void reportTransactions()
+    {
+        System.out.println("\nTRANSACTION LISTING REPORT"); 
+        for (Transaction transaction : transactionList)
+        {
+            transaction.list();
+        }
+    } 
+    
+    public void readTransactions()
+    {
+        storeTransactions(transactionList, INPUT_FILE_LOCATION); 
+        Arrays.sort(transactionList, 0, transactionList.length);
+        int index = 0;
+        for (Transaction trans : transactionList)
+        {
+            if (trans instanceof Rewardable)
+            {
+                rewardsList[index++] = (Rewardable) trans; 
+            }
+        }
+    }
+    
+    private static void storeTransactions(Transaction[] list, String inputFilePath)
+    {
+        Path inputLocation = Paths.get(inputFilePath); 
+        BufferedReader br = null; 
+        String line = null; 
+        int index = 0;
+        
+        try
+        {
+            br = Files.newBufferedReader(inputLocation, StandardCharsets.UTF_8);
+            while((line = br.readLine())!= null)
+            {
+                // parse data and add to the array 
+                addData(list, line, index++); 
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+                
+    }
+    
+    private static void addData(Transaction[] list, String line, int index) 
+    {
+        String type = null; 
+        String[] data = null; 
+        String[] dates = null;
+        int id = 0; 
+        int month = 0; 
+        int day = 0; 
+        int year = 0; 
+        double amount = 0; 
+        data = line.split("~");
+        dates = data[1].split("/"); 
+        type = data[0]; 
+        
+        // assign dates
+        month = Integer.parseInt(dates[0]);
+        day = Integer.parseInt(dates[1]);
+        year = Integer.parseInt(dates[2]);
+        
+        // assign data for Transaction objects
+        id = Integer.parseInt(data[2]); 
+        amount = Double.parseDouble(data[3]);
+        
+        // instance fields specific to different Transactions will be defined separately
+        if (type.equals("Department"))
+        {
+            String name = null; 
+            String returnPol = null; 
+            name = data[4]; 
+            returnPol = data[5]; 
+            list[index] = new DepartmentStoreTransaction(id, month, day, year, amount, name, returnPol); 
+        }
+        
+        if (type.equals("Bank"))
+        {
+            String method = null; 
+            double charge = 0; 
+            method = data[4]; 
+            charge = Double.parseDouble(data[5]);  
+            list[index] = new BankTransaction(id, month, day, year, amount, method, charge); 
+        }
+        
+        if (type.equals("Grocery"))
+        {
+            String name = null; 
+            name = data[4]; 
+            list[index] = new GroceryTransaction(id, month, day, year, amount, name); 
+        }
+    }
+    
+    public void lastDigits()
+    {
+        for (int i = 12; i < credNum.length(); i++)
+        {
+            System.out.print(credNum.charAt(i));
+        }
+    }
+}
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Date class contains all of the data in order to make a date object. Using the data given to the constructor, <br>
+ * calling the overridden toString() method will format the values into a date. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public class Date implements Comparable<Date>, Cloneable
+{
+    private int month, day, year;
+
+    // default constructor
+    public Date()
+    {
+        month = 1;
+        day = 1;
+        year = 1970;
+    }
+
+    // non-default constructor
+    public Date(int month, int day, int year)
+    {
+        if (month <= 12 && month >= 1)
+        {
+            this.month = month;
+        } else
+        {
+            this.month = 1;
+        }
+        if (day >= 1 && day <= 31)
+        {
+            this.day = day;
+        } else
+        {
+            this.day = 1;
+        }
+        if (year >= 1970)
+        {
+            this.year = year;
+        } else
+        {
+            this.year = 1970;
+        }
+    }
+    
+    // copy constructor 
+    public Date(Date date)
+    {
+        month = date.month;
+        day = date.day;
+        year = date.year; 
+    }
+
+    public String toString()
+    {
+        return String.format("%02d/%02d/%04d", month, day, year);
+    }
+
+    public boolean equals(Date date)
+    {
+        return this.month == date.month && this.day == date.day && this.year == date.year;
+    }
+    
+    public Date clone() throws CloneNotSupportedException 
+    {
+        return (Date) super.clone(); 
+    }
+
+    public int compareTo(Date o)
+    {
+        if (this.equals(o))
+        {
+            return 0; 
+        }
+        if (o.year > this.year)
+        {
+            return 1;
+        }
+        if (o.year < this.year)
+        {
+            return -1; 
+        }
+        if (o.year == this.year)
+        {
+            if (o.month > this.month)
+            {
+                return 1; 
+            }
+            if (o.month < this.month)
+            {
+                return -1; 
+            }
+            if (o.month == this.month)
+            {
+                if (o.day > this.day)
+                {
+                    return 1; 
+                } else
+                {
+                    return -1; 
+                }
+            }
+        }
+        return 0; 
+    }
+
+    public int getMonth()
+    {
+        return month;
+    }
+
+    public int getDay()
+    {
+        return day;
+    }
+
+    public int getYear()
+    {
+        return year; 
+    }
+    
+    public void monthTo(int mon)
+    {
+        month = mon; 
+    }
+    
+    public void dayTo(int day)
+    {
+        this.day = day; 
+    }
+    
+    public void yearTo(int yr)
+    {
+        year = yr; 
+    }
+}
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Transaction abstract class is the superclass of DepartmentStoreTransaction, BankTransaction,  <br>
+ * and GroceryTransaction, while many more can be made. It contains an abstract list() method, which is to all <br>
+ * transaction information in a String. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public abstract class Transaction implements Comparable <Transaction>
+{
+    protected int transID; 
+    protected double transAmnt; 
+    protected Date date; 
+    
+    // default constructor
+    public Transaction()
+    {
+        transID = 0; 
+        date = new Date(); 
+        transAmnt = 0; 
+    }
+    
+    // non-default constructors
+    public Transaction(int id, int month, int day, int year, double amount)
+    {
+        transID = id;
+        date = new Date(month, day, year); 
+        transAmnt = amount; 
+    }
+    
+    public Transaction(int id, Date d, double amount)
+    {
+        transID = id; 
+        transAmnt = amount; 
+        try
+        {
+            date = d.clone();
+        } catch (CloneNotSupportedException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    abstract public void list();
+    
+    public String toString()
+    {
+        return String.format("%s~%d~%.2f", date.toString(), transID, transAmnt); 
+    }
+    
+    public boolean equals(Transaction other)
+    {
+        return other.transID == transID; 
+    }
+    
+    public int compareTo(Transaction transaction)
+    {
+        if (this.equals(transaction))
+        {
+            return 0; 
+        }
+        if (transID > transaction.transID)
+        {
+            return 1; 
+        }
+        return -1; 
+    }
+    
+    public int getID()
+    {
+        return transID; 
+    }
+    
+    public double getAmount()
+    {
+        return transAmnt; 
+    }
+    
+    public String getDate()
+    {
+        return date.toString(); 
+    }
+    
+    public void changeID(int id)
+    {
+        transID = id; 
+    }
+    
+    public void changeAmount(double amount)
+    {
+        transAmnt = amount; 
+    }
+    
+    public void changeDate(Date d)
+    {
+        try
+        {
+            date = d.clone(); 
+        } catch (CloneNotSupportedException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+    }
+}
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Subclass of Transaction, and represents a transaction made in a department store. It implements  <br>
+ * the Rewardable interface, as points can be earned by spending money here. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public class DepartmentStoreTransaction extends Transaction implements Rewardable
+{
+    private String departmentName;
+    private String returnPolicy;
+
+    // default constructor
+    public DepartmentStoreTransaction()
+    {
+        super();
+    }
+
+    // non-default constructors
+    public DepartmentStoreTransaction(int id, int month, int day, int year, double amount, String name,
+            String returnPol)
+    {
+        super(id, month, day, year, amount);
+        departmentName = name;
+        returnPolicy = returnPol;
+    }
+    
+    public DepartmentStoreTransaction(int id, Date d, double amount, String name, String policy)
+    {
+        super(id, d, amount); 
+        departmentName = name; 
+        returnPolicy = policy; 
+    }
+
+    public String toString()
+    {
+        return String.format("%s~%s~%s~%s", "Department", super.toString(), departmentName, returnPolicy);
+    }
+
+    public void list()
+    {
+        System.out.format("%-13s%-15s%-10s$%-10.2f%s\n", date.toString(), "Department", departmentName,
+                transAmnt, returnPolicy);
+    }
+
+    public double earnPoints()
+    {
+        return transAmnt * 3;
+    }
+
+    public String getName()
+    {
+        return departmentName; 
+    }
+    
+    public String getReturnPol()
+    {
+        return returnPolicy; 
+    }
+    
+    public void changeName(String name)
+    {
+        departmentName = name;
+    }
+
+    public void changePolicy(String num)
+    {
+        returnPolicy = num;
+    }
+
+}
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Subclass of Transaction class, and represents a transaction made in a Bank. Each transaction results <br>
+ * in a banking charge, which will be added to the total transaction amount. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public class BankTransaction extends Transaction
+{
+    private String withdrawType;
+    private double charge;
+
+    // default constructor
+    public BankTransaction()
+    {
+        super();
+    }
+
+    // non-default constructor
+    public BankTransaction(int id, int month, int day, int year, double amount, String withType, double charge)
+    {
+        super(id, month, day, year, amount);
+        withdrawType = withType;
+        this.charge = charge;
+    }
+    
+    public BankTransaction(int id, Date date, double amount, String withType, double charge)
+    {
+        super(id, date, amount); 
+        withdrawType = withType; 
+        this.charge = charge; 
+    }
+
+    public String toString()
+    {
+        return String.format("%s~%s~%s~%s", "Bank", super.toString(), withdrawType, charge);
+    }
+
+    public void list()
+    {
+        System.out.format("%-13s%-15s%-10s$%-10.2f%.2f\n", date.toString(), "Bank", withdrawType, 
+                transAmnt + charge, charge);
+    }
+
+    public String getType()
+    {
+        return withdrawType; 
+    }
+    
+    public double getCharge()
+    {
+        return charge; 
+    }
+    
+    public void changeType(String type)
+    {
+        withdrawType = type;
+    }
+
+    public void changeCharge(double fee)
+    {
+        charge = fee;
+    }
+}
+
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Subclass of Transaction. It represents a Transaction made in a grocery store. It implements  <br>
+ * the Rewardable interface as each transaction will be rewarded with points. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+
+public class GroceryTransaction extends Transaction implements Rewardable
+{
+    private String storeName;
+
+    // default constructor
+    public GroceryTransaction()
+    {
+        super();
+    }
+
+    // non-default constructors
+    public GroceryTransaction(int id, int month, int day, int year, double amount, String name)
+    {
+        super(id, month, day, year, amount);
+        storeName = name;
+    }
+    
+    public GroceryTransaction(int id, Date date, double amount, String name)
+    {
+        super(id, date, amount); 
+        storeName = name; 
+    }
+
+    public String toString()
+    {
+        return String.format("%s~%s~%s", "Grocery", super.toString(), storeName);
+    }
+
+    public void list()
+    {
+        System.out.format("%-13s%-15s%-10s$%.2f\n", date.toString(), "Grocery", storeName, transAmnt);
+    }
+
+    public double earnPoints()
+    {
+        return transAmnt * 5;
+    }
+
+    public String getStoreName()
+    {
+        return storeName; 
+    }
+    
+    public void changeStore(String store)
+    {
+        storeName = store;
+    }
+
+}
+
+
+
+/**
+ * @version 1.0 7-18-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Rewardable interface allows different Transactions to <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-18-2020 <br>
+ * Programmer: Andrew Li
+ */
+public interface Rewardable
+{
+    double earnPoints(); 
+}

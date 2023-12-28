@@ -1,0 +1,8 @@
+Department~11/23/2020~1111~22.34~Macy's~30 day return
+Bank~12/17/2006~4444~200.0~CASH~10.00
+Department~2/20/2016~2222~10.23~Sears~60 day return
+Grocery~7/16/2020~3333~123.67~Costco
+Grocery~6/17/2019~5555~66.55~Walmart
+Bank~3/12/2013~8888~500.0~ATM~25.00
+Grocery~5/16/2018~6666~56.13~Target
+Department~4/29/2014~7777~20.89~Kohls~15 day return

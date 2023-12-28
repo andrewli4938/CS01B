@@ -1,0 +1,504 @@
+// NOTE: ALL CLASSES ARE WRITTEN IN SEPARATE FILES
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: MLSListingsApp contains the main method, which creates a Linked List of Property objects, and proceeds to
+ * display them on the JTextArea on the JFrame. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class MLSListingsApp
+{
+    public static void main(String[] args)
+    {
+        PropertyList propertyList = new PropertyList();
+        propertyList.initialize();
+        MLSListingsView frame = new MLSListingsView(); 
+        frame.setProperties(propertyList);
+        frame.setVisible(true);
+    }
+}
+
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: MLSListingsView class is derived from JFrame. The constructor creates a JFrame with all of the necessary buttons 
+ * needed to control the output to the JTextArea in the center, including all of the listeners. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class MLSListingsView extends JFrame
+{
+    private static final int viewWidth = 720;
+    private static final int viewHeight = 450;
+
+    private PropertyList propertyList;
+
+    private JComboBox<Object> comboProperty;
+    private JLabel labelSearch;
+    private JButton buttonGo, buttonShow, buttonCondo, buttonSFH, buttonClear;
+    private JTextArea textDisplay;
+    private JPanel panelSouth, panelNorth;
+    private JScrollPane scrollPanel;
+
+    String labels = String.format("%-55s%-16s%-15s%s\n", "Address", "Offered Price", "Year Built", "Extra Info");
+    
+    public MLSListingsView()
+    {
+        // create new JFrame
+        setTitle("MLS Listings");
+        setSize(viewWidth, viewHeight);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        String[] comboArray =
+        { "Under 400K", "400K - 600K", "600K - 800K", "800K - 1M", "1M or more" };
+
+        // instantiate UI components
+        buttonGo = new JButton("Go");
+        buttonShow = new JButton("Show All");
+        buttonCondo = new JButton("Show Condo");
+        buttonSFH = new JButton("Show SFH");
+        buttonClear = new JButton("Clear");
+        comboProperty = new JComboBox<Object>(comboArray);
+        labelSearch = new JLabel("Search Property:");
+        textDisplay = new JTextArea();
+        panelSouth = new JPanel();
+        panelNorth = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        // add UI components to frame
+        // center
+        textDisplay.setFont(new Font("monospaced", Font.PLAIN, 12));
+        textDisplay.setText("Select one of the display options to view the property list categories.");
+        textDisplay.setEditable(false);
+        scrollPanel = new JScrollPane(textDisplay);
+        scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        add(scrollPanel);
+
+        // south
+        panelSouth.add(buttonShow);
+        panelSouth.add(buttonSFH);
+        panelSouth.add(buttonCondo);
+        panelSouth.add(buttonClear);
+        add(BorderLayout.SOUTH, panelSouth);
+
+        // north
+        panelNorth.add(labelSearch);
+        panelNorth.add(comboProperty);
+        panelNorth.add(buttonGo);
+        add(BorderLayout.NORTH, panelNorth);
+
+        // add listeners to UI components
+        buttonShow.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                textDisplay.setText(labels);
+                textDisplay.append(propertyList.getAllProperties());
+            }
+        });
+
+        buttonSFH.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                textDisplay.setText(labels);
+                textDisplay.append(propertyList.getSingleFamilyHouse());
+            }
+        });
+
+        buttonCondo.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                textDisplay.setText(labels);
+                textDisplay.append(propertyList.getCondo());
+            }
+        });
+
+        buttonClear.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                textDisplay.selectAll();
+                textDisplay.replaceSelection("");
+            }
+        });
+
+        buttonGo.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                textDisplay.setText(labels);
+                switch(comboProperty.getSelectedIndex())
+                {
+                case 0: 
+                    textDisplay.append(propertyList.searchByPriceRange(0, 400000));
+                    break;
+                case 1: 
+                    textDisplay.append(propertyList.searchByPriceRange(400000, 600000));
+                    break;
+                case 2: 
+                    textDisplay.append(propertyList.searchByPriceRange(600000, 800000));
+                    break;
+                case 3: 
+                    textDisplay.append(propertyList.searchByPriceRange(800000, 1000000));
+                    break;
+                case 4:
+                    textDisplay.append(propertyList.searchByPriceRange(1000000, Integer.MAX_VALUE));
+                    break;
+                }
+            }
+        });
+    }
+
+    public void setProperties(PropertyList propertyList)
+    {
+        this.propertyList = propertyList;
+    }
+}
+
+
+import java.io.*;
+import java.nio.file.*;
+import java.nio.charset.*;
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: PropertyList class is the Linked List class. It contains the insert() method, which inserts the Property object
+ * in the front of the list, as well as many other methods that iterate through the list. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class PropertyList
+{
+    private static final String FILE_LOCATION = 
+            "/Users/w.li/eclipse-workspace/CS1B/Assignments/Assignment03/PropertyListText.txt"; 
+    private Property head; 
+    
+    public PropertyList()
+    {
+        head = null; 
+    }
+    
+    private void insert(Property property)
+    {
+        property.setNext(head);
+        head = property;   
+    }
+    
+    public void initialize()
+    {
+        Path filePath = Paths.get(FILE_LOCATION); 
+        BufferedReader br; 
+        int index = 0;
+        String line = null; 
+        Property[] propertyArray = new Property[100]; 
+        
+        try
+        {
+            br = Files.newBufferedReader(filePath, StandardCharsets.UTF_8);
+            while((line = br.readLine()) != null)
+            {
+                String[] data = null; 
+                String type = null; 
+                double offeredPrice;
+                int yearBuilt; 
+                
+                data = line.split(";");
+                type = data[0];
+                offeredPrice = Double.parseDouble(data[2]);
+                yearBuilt = Integer.parseInt(data[3]);
+    
+                if(type.equalsIgnoreCase("Condo"))
+                {
+                    Double hoaFee;
+                    hoaFee = Double.parseDouble(data[4]); 
+                    propertyArray[index] = new Condo(data[1], offeredPrice, yearBuilt, hoaFee);
+                }
+                if(type.equalsIgnoreCase("SFH"))
+                {
+                    int backyardArea; 
+                    backyardArea = Integer.parseInt(data[4]);
+                    propertyArray[index] = new SingleFamilyHouse(data[1], offeredPrice, yearBuilt, backyardArea);
+                }
+                index++;
+            }
+            br.close();
+            for(Property property : propertyArray)
+            {
+                if(property  != null)
+                {
+                    this.insert(property);                    
+                }
+            }
+        } catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    public String getAllProperties()
+    {
+        Property property = head;
+        String allProperties = ""; 
+        
+        while(property != null)
+        {
+            allProperties += property.toString() + "\n";
+            property = property.getNext();
+        }
+        return allProperties;
+    }
+    
+    public String getSingleFamilyHouse()
+    {
+        Property property = head; 
+        String allSFH = ""; 
+        
+        while(property != null)
+        {
+            if(property instanceof SingleFamilyHouse)
+            {
+                allSFH += property.toString() + "\n"; 
+            }
+            property = property.getNext();
+        }
+        return allSFH; 
+    }
+    
+    public String getCondo()
+    {
+        Property property = head; 
+        String allCondo = ""; 
+
+        while(property != null)
+        {
+            if(property instanceof Condo)
+            {
+                allCondo += property.toString() + "\n"; 
+            }
+            property = property.getNext();
+        }
+        return allCondo; 
+    }
+    
+    public String searchByPriceRange(double min, double max)
+    {
+        Property property = head; 
+        String allFound = ""; 
+
+        while(property != null)
+        {
+            if(property.getPrice() >= min && property.getPrice() <= max)
+            {
+                allFound += property.toString() + "\n"; 
+            }
+            property = property.getNext();
+        }
+        return allFound;
+    }
+}
+
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Property class is where all of the data put out on the JTextArea is stored. It contains a toString() method that formats
+ * the data into a presentable String. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class Property
+{
+    private String address; 
+    private double offeredPrice; 
+    private int yearBuilt;
+    private Property next; 
+    
+    public Property()
+    {
+        next = null; 
+        address = "4444 Candy St, Candyland, CA 12345";
+        offeredPrice = 500000; 
+        yearBuilt = 1970; 
+    }
+    
+    public Property(String address, double offeredPrice, int yearBuilt)
+    {
+        next = null; 
+        this.address = address; 
+        this.offeredPrice = offeredPrice; 
+        this.yearBuilt = yearBuilt; 
+    }
+    
+    public String toString()
+    {
+        return String.format("%-55s$%-15.2f%-15d", address, offeredPrice, yearBuilt); 
+    }
+    
+    public boolean equals(Property property)
+    {
+        return address == property.address && offeredPrice == property.offeredPrice;
+    }
+    
+    public String getAddress()
+    {
+        return address; 
+    }
+    
+    public double getPrice()
+    {
+        return offeredPrice;
+    }
+    
+    public int getYearBuilt()
+    {
+        return yearBuilt; 
+    }
+    
+    public void setAddress(String address)
+    {
+        this.address = address; 
+    }
+    
+    public void setPrice(double offeredPrice)
+    {
+        this.offeredPrice = offeredPrice; 
+    }
+    
+    public void setYearBuilt(int yearBuilt)
+    {
+        this.yearBuilt = yearBuilt; 
+    }
+    
+    public Property getNext()
+    {
+        return next; 
+    }
+    
+    public void setNext(Property property)
+    {
+        next = property; 
+    }
+}
+
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: SingleFamilyHouse is a class derived from Property, and contains only one instance field in addition to its superclass 
+ * fields. It contains its own toString() method that calls the superclass toString() method, and adds the backyardArea data to the
+ * end of the string. <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class SingleFamilyHouse extends Property
+{
+    private int backyardArea; 
+    
+    public SingleFamilyHouse()
+    {
+        super(); 
+        backyardArea = 0; 
+    }
+    
+    public SingleFamilyHouse(String address, double offeredPrice, int yearBuilt, int backyardArea)
+    {
+        super(address, offeredPrice, yearBuilt); 
+        this.backyardArea = backyardArea; 
+    }
+    
+    public String toString()
+    {
+        return super.toString() + backyardArea + " (sqft)"; 
+    }
+    
+    public boolean equals(SingleFamilyHouse sfh)
+    {
+        return super.equals(sfh) && backyardArea == sfh.backyardArea;
+    }
+    
+    public int getBackyardArea()
+    {
+        return backyardArea; 
+    }
+    
+    public void setBackyardArea(int backyardArea)
+    {
+        this.backyardArea = backyardArea; 
+    }
+}
+
+
+/**
+ * @version 1.0 7-28-2020
+ * @author Andrew Li
+ * <br>
+ * Purpose: Condo is a class derived from Property, and contains only one instance field in addition to its superclass 
+ * fields. It contains its own toString() method that calls the superclass toString() method, and adds the hoaFee data to the
+ * end of the string <br>
+ * <br>
+ * Revision History: <br>
+ * Date: 7-28-2020 <br>
+ * Programmer: Andrew Li
+ */
+public class Condo extends Property
+{
+    private double hoaFee; 
+    
+    public Condo()
+    {
+        super(); 
+        hoaFee = 175; 
+    }
+    
+    public Condo(String address, double offeredPrice, int yearBuilt, double hoaFee)
+    {
+        super(address, offeredPrice, yearBuilt);
+        this.hoaFee = hoaFee; 
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "HOA Fee: $" + hoaFee; 
+    }
+    
+    public boolean equals(Condo condo)
+    {
+        return super.equals(condo) && hoaFee == condo.hoaFee; 
+    }
+    
+    public double getFee()
+    {
+        return hoaFee; 
+    }
+    
+    public void setFee(double hoaFee)
+    {
+        this.hoaFee = hoaFee; 
+    }
+}

@@ -1,0 +1,219 @@
+Welcome to Big Brain Dealership at The Lost City
+Loading vehicles from Database. Please wait ...
+Done.
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+1
+-------------------------------------------
+|             Vehicle Inventory           |
+-------------------------------------------
+
+Make         Model           Year  Price
+-------------------------------------------
+Ford         Taurus          2012  $9566.99
+Ferrari      FF              2013  $302450.99
+BMW          325i            2014  $37899.88
+Ford         Taurus          2014  $17899.00
+Porsche      911 Convertible 2014  $103925.00
+Porsche      911 Convertible 2014  $200.99
+Cadillac     ATS Sedan       2015  $42955.00
+Toyota       Prius           2015  $30005.05
+Rolls-Royce  Phantom         2016  $471175.00
+Toyota       Camry           2017  $22158.95
+Lamborghini  Aventador S     2020  $417826.99
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+2
+Enter the car make:
+ford
+Enter the car model:
+taurus
+Ford         Taurus          2012  $9566.99
+Ford         Taurus          2014  $17899.00
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+2
+Enter the car make:
+Porsche
+Enter the car model:
+911 Convertible
+Porsche      911 Convertible 2014  $103925.00
+Porsche      911 Convertible 2014  $200.99
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+2
+Enter the car make:
+ford
+Enter the car model:
+incorrect name
+No such vehicle is found.
+
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+2
+Enter the car make:
+toyota
+Enter the car model:
+Prius
+Toyota       Prius           2015  $30005.05
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+3
+Enter minimum price:
+100
+Enter maximum price:
+100000
+Ford         Taurus          2012  $9566.99
+BMW          325i            2014  $37899.88
+Ford         Taurus          2014  $17899.00
+Porsche      911 Convertible 2014  $200.99
+Cadillac     ATS Sedan       2015  $42955.00
+Toyota       Prius           2015  $30005.05
+Toyota       Camry           2017  $22158.95
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+3
+Enter minimum price:
+22158.94
+Enter maximum price:
+22158.99
+Toyota       Camry           2017  $22158.95
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+3
+Enter minimum price:
+this is a string
+Enter a valid number.
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+this is not a valid choice
+Please enter a valid number.
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+4
+Enter the car make:
+lambORGhini
+Enter the car model:
+aventador S
+Enter the car year:
+2020
+Lamborghini  Aventador S     2020  $417826.99
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+4
+Enter the car make:
+porsche
+Enter the car model:
+911 Convertible
+Enter the car year:
+2014
+Porsche      911 Convertible 2014  $103925.00
+Porsche      911 Convertible 2014  $200.99
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+4
+Enter the car make:
+nocarsfound
+Enter the car model:
+no car should be found
+Enter the car year:
+no car should be found
+Please enter valid values.
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+4
+Enter the car make:
+ford
+Enter the car model:
+ford
+Enter the car year:
+2000
+No such vehicle is found.
+
+           MENU
+1. View vehicle inventory
+2. Search by make and model
+3. Search by price
+4. Search similar vehicles
+5. Quit
+Enter your choice:
+5
+Thanks for using Big Brain Dealership at The Lost City!

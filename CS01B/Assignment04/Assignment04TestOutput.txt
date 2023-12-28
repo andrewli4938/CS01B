@@ -1,0 +1,502 @@
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+1
+
+LIST OF ALL ACCOUNTS
+1-408-111-0222
+	MEDIA: Size:6.5 MB, Format: GIF                       Time: 144840960,From: 1-408-111-0222,To: 1-650-111-1010,Charge: $3.25
+	TEXT: Are you going to the movie tonight?             Time: 144840960,From: 1-408-111-0222,To: 1-650-111-0000,Charge: $0.20
+	VOICE: Duration:120 (sec), Format: MPE                Time: 144840960,From: 1-408-111-0222,To: 1-650-222-5555,Charge: $12.00
+	TEXT: Mom said you go home by 11pm                    Time: 144840960,From: 1-408-111-0222,To: 1-650-666-9999,Charge: $0.20
+	VOICE: Duration:231 (sec), Format: MP4                Time: 144840960,From: 1-408-111-0222,To: 1-650-852-4774,Charge: $23.10
+	MEDIA: Size:2.75 MB, Format: GIF                      Time: 144840960,From: 1-408-111-0222,To: 1-650-217-2003,Charge: $1.38
+	MEDIA: Size:1.75 MB, Format: GIF                      Time: 144840960,From: 1-408-111-0222,To: 1-650-333-8888,Charge: $0.88
+		Charge:  $41.00
+1-408-222-0222
+	TEXT: Happy birthday!!!                               Time: 144840960,From: 1-408-222-0222,To: 1-650-333-6666,Charge: $0.20
+	VOICE: Duration:670 (sec), Format: MOV                Time: 144840960,From: 1-408-222-0222,To: 1-650-812-0011,Charge: $67.00
+		Charge:  $67.20
+1-408-333-0222
+	MEDIA: Size:2.5 MB, Format: JPEG                      Time: 144840960,From: 1-408-333-0222,To: 1-650-123-2000,Charge: $1.25
+	TEXT: Java is fun to learn right                      Time: 144840960,From: 1-408-333-0222,To: 1-650-213-4444,Charge: $0.20
+	MEDIA: Size:5.5 MB, Format: GIF                       Time: 144840960,From: 1-408-333-0222,To: 1-650-444-6666,Charge: $2.75
+		Charge:  $4.20
+1-408-444-0222
+	MEDIA: Size:3.8 MB, Format: JPG                       Time: 144840960,From: 1-408-444-0222,To: 1-650-567-2003,Charge: $1.90
+		Charge:  $1.90
+1-408-555-0222
+	TEXT: Can you close the backdoor?                     Time: 144840960,From: 1-408-555-0222,To: 1-650-321-3131,Charge: $0.20
+	TEXT: I got to go now. Sorry!                         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	MEDIA: Size:3.05 MB, Format: PNG                      Time: 144840960,From: 1-408-555-0222,To: 1-650-287-2203,Charge: $1.53
+	TEXT: Will come to your house this afternoon?         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Yeah!                                           Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	VOICE: Duration:172 (sec), Format: MOV                Time: 144840960,From: 1-408-555-0222,To: 1-650-000-2828,Charge: $17.20
+		Charge:  $19.53
+1-408-666-0333
+	TEXT: I'm tired today.                                Time: 144840960,From: 1-408-666-0333,To: 1-650-555-4444,Charge: $0.20
+	MEDIA: Size:3.5 MB, Format: GIF                       Time: 144840960,From: 1-408-666-0333,To: 1-650-123-2000,Charge: $1.75
+		Charge:  $1.95
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+2
+Updated Version:
+
+LIST OF ALL ACCOUNTS
+1-408-111-0222
+	TEXT: Are you going to the movie tonight?             Time: 144840960,From: 1-408-111-0222,To: 1-650-111-0000,Charge: $0.20
+	VOICE: Duration:120 (sec), Format: MPE                Time: 144840960,From: 1-408-111-0222,To: 1-650-222-5555,Charge: $12.00
+	TEXT: Mom said you go home by 11pm                    Time: 144840960,From: 1-408-111-0222,To: 1-650-666-9999,Charge: $0.20
+	VOICE: Duration:231 (sec), Format: MP4                Time: 144840960,From: 1-408-111-0222,To: 1-650-852-4774,Charge: $23.10
+	MEDIA: Size:2.75 MB, Format: GIF                      Time: 144840960,From: 1-408-111-0222,To: 1-650-217-2003,Charge: $1.38
+	MEDIA: Size:1.75 MB, Format: GIF                      Time: 144840960,From: 1-408-111-0222,To: 1-650-333-8888,Charge: $0.88
+		Charge:  $37.75
+1-408-222-0222
+	TEXT: Happy birthday!!!                               Time: 144840960,From: 1-408-222-0222,To: 1-650-333-6666,Charge: $0.20
+	VOICE: Duration:670 (sec), Format: MOV                Time: 144840960,From: 1-408-222-0222,To: 1-650-812-0011,Charge: $67.00
+		Charge:  $67.20
+1-408-333-0222
+	TEXT: Java is fun to learn right                      Time: 144840960,From: 1-408-333-0222,To: 1-650-213-4444,Charge: $0.20
+	MEDIA: Size:5.5 MB, Format: GIF                       Time: 144840960,From: 1-408-333-0222,To: 1-650-444-6666,Charge: $2.75
+		Charge:  $2.95
+1-408-444-0222
+		Charge:  $0.00
+1-408-555-0222
+	TEXT: Can you close the backdoor?                     Time: 144840960,From: 1-408-555-0222,To: 1-650-321-3131,Charge: $0.20
+	TEXT: I got to go now. Sorry!                         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Will come to your house this afternoon?         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Yeah!                                           Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	VOICE: Duration:172 (sec), Format: MOV                Time: 144840960,From: 1-408-555-0222,To: 1-650-000-2828,Charge: $17.20
+		Charge:  $18.00
+1-408-666-0333
+	TEXT: I'm tired today.                                Time: 144840960,From: 1-408-666-0333,To: 1-650-555-4444,Charge: $0.20
+		Charge:  $0.20
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+2
+Updated Version:
+
+LIST OF ALL ACCOUNTS
+1-408-111-0222
+	TEXT: Are you going to the movie tonight?             Time: 144840960,From: 1-408-111-0222,To: 1-650-111-0000,Charge: $0.20
+	VOICE: Duration:120 (sec), Format: MPE                Time: 144840960,From: 1-408-111-0222,To: 1-650-222-5555,Charge: $12.00
+	TEXT: Mom said you go home by 11pm                    Time: 144840960,From: 1-408-111-0222,To: 1-650-666-9999,Charge: $0.20
+	VOICE: Duration:231 (sec), Format: MP4                Time: 144840960,From: 1-408-111-0222,To: 1-650-852-4774,Charge: $23.10
+	MEDIA: Size:1.75 MB, Format: GIF                      Time: 144840960,From: 1-408-111-0222,To: 1-650-333-8888,Charge: $0.88
+		Charge:  $36.38
+1-408-222-0222
+	TEXT: Happy birthday!!!                               Time: 144840960,From: 1-408-222-0222,To: 1-650-333-6666,Charge: $0.20
+	VOICE: Duration:670 (sec), Format: MOV                Time: 144840960,From: 1-408-222-0222,To: 1-650-812-0011,Charge: $67.00
+		Charge:  $67.20
+1-408-333-0222
+	TEXT: Java is fun to learn right                      Time: 144840960,From: 1-408-333-0222,To: 1-650-213-4444,Charge: $0.20
+		Charge:  $0.20
+1-408-444-0222
+		Charge:  $0.00
+1-408-555-0222
+	TEXT: Can you close the backdoor?                     Time: 144840960,From: 1-408-555-0222,To: 1-650-321-3131,Charge: $0.20
+	TEXT: I got to go now. Sorry!                         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Will come to your house this afternoon?         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Yeah!                                           Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	VOICE: Duration:172 (sec), Format: MOV                Time: 144840960,From: 1-408-555-0222,To: 1-650-000-2828,Charge: $17.20
+		Charge:  $18.00
+1-408-666-0333
+	TEXT: I'm tired today.                                Time: 144840960,From: 1-408-666-0333,To: 1-650-555-4444,Charge: $0.20
+		Charge:  $0.20
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+2
+Updated Version:
+
+LIST OF ALL ACCOUNTS
+1-408-111-0222
+	TEXT: Are you going to the movie tonight?             Time: 144840960,From: 1-408-111-0222,To: 1-650-111-0000,Charge: $0.20
+	VOICE: Duration:120 (sec), Format: MPE                Time: 144840960,From: 1-408-111-0222,To: 1-650-222-5555,Charge: $12.00
+	TEXT: Mom said you go home by 11pm                    Time: 144840960,From: 1-408-111-0222,To: 1-650-666-9999,Charge: $0.20
+	VOICE: Duration:231 (sec), Format: MP4                Time: 144840960,From: 1-408-111-0222,To: 1-650-852-4774,Charge: $23.10
+		Charge:  $35.50
+1-408-222-0222
+	TEXT: Happy birthday!!!                               Time: 144840960,From: 1-408-222-0222,To: 1-650-333-6666,Charge: $0.20
+	VOICE: Duration:670 (sec), Format: MOV                Time: 144840960,From: 1-408-222-0222,To: 1-650-812-0011,Charge: $67.00
+		Charge:  $67.20
+1-408-333-0222
+	TEXT: Java is fun to learn right                      Time: 144840960,From: 1-408-333-0222,To: 1-650-213-4444,Charge: $0.20
+		Charge:  $0.20
+1-408-444-0222
+		Charge:  $0.00
+1-408-555-0222
+	TEXT: Can you close the backdoor?                     Time: 144840960,From: 1-408-555-0222,To: 1-650-321-3131,Charge: $0.20
+	TEXT: I got to go now. Sorry!                         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Will come to your house this afternoon?         Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	TEXT: Yeah!                                           Time: 144840960,From: 1-408-555-0222,To: 1-650-991-7801,Charge: $0.20
+	VOICE: Duration:172 (sec), Format: MOV                Time: 144840960,From: 1-408-555-0222,To: 1-650-000-2828,Charge: $17.20
+		Charge:  $18.00
+1-408-666-0333
+	TEXT: I'm tired today.                                Time: 144840960,From: 1-408-666-0333,To: 1-650-555-4444,Charge: $0.20
+		Charge:  $0.20
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+text
+Message time (secs from 1/1/1970):
+144840961
+Sending number:
+5105856299
+Receiving number:
+5105856298
+Text message content
+this should be equal
+Message 2:
+Message type (Text, Voice, Media):
+text
+Message time (secs from 1/1/1970):
+144840961
+Sending number:
+5105856299
+Receiving number:
+5105856298
+Text message content
+this should be equal
+Both Messages Are Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+text
+Message time (secs from 1/1/1970):
+12345678
+Sending number:
+5105555555
+Receiving number:
+5105555556
+Text message content
+this is not equal
+Message 2:
+Message type (Text, Voice, Media):
+text
+Message time (secs from 1/1/1970):
+123456789
+Sending number:
+5105555555
+Receiving number:
+5105555555
+Text message content
+this is not equal
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+123456789
+Sending number:
+NUMBER
+Receiving number:
+NUMBER1
+Voice message duration (secs):
+10
+Voice message format:
+mp4
+Message 2:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+123456789
+Sending number:
+NUMBER
+Receiving number:
+NUMBER1
+Voice message duration (secs):
+10
+Voice message format:
+MP4
+Both Messages Are Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+123456789
+Sending number:
+NUMBER
+Receiving number:
+NUMBER1
+Voice message duration (secs):
+10
+Voice message format:
+mp4
+Message 2:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+123456780
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Voice message duration (secs):
+12
+Voice message format:
+mP4
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+media
+Message time (secs from 1/1/1970):
+123456788
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.5
+Media message format:
+GIF
+Message 2:
+Message type (Text, Voice, Media):
+MEDIA
+Message time (secs from 1/1/1970):
+123456788
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.5
+Media message format:
+GIF
+Both Messages Are Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+media
+Message time (secs from 1/1/1970):
+101010
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.5
+Media message format:
+GIF
+Message 2:
+Message type (Text, Voice, Media):
+MEDIA
+Message time (secs from 1/1/1970):
+101010
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.0
+Media message format:
+notGIF
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+Text
+Message time (secs from 1/1/1970):
+101010
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Text message content
+content
+Message 2:
+Message type (Text, Voice, Media):
+media
+Message time (secs from 1/1/1970):
+102345
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.0
+Media message format:
+gif
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+media
+Message time (secs from 1/1/1970):
+12345
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Media message size (MB)
+2.5
+Media message format:
+GIF
+Message 2:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+12345
+Sending number:
+NUMBER
+Receiving number:
+NUMBER
+Voice message duration (secs):
+24
+Voice message format:
+mp4
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+3
+
+Equals test - please enter message specifics
+
+Message 1:
+Message type (Text, Voice, Media):
+text
+Message time (secs from 1/1/1970):
+12345
+Sending number:
+NUMBER
+Receiving number:
+NUMBER1
+Text message content
+content
+Message 2:
+Message type (Text, Voice, Media):
+voice
+Message time (secs from 1/1/1970):
+12345
+Sending number:
+NUMBER
+Receiving number:
+NUMBER1
+Voice message duration (secs):
+10
+Voice message format:
+mP4
+The Two Messages Are Not Equal
+
+FOOTHILL WIRELESS at San Mateo County
+MESSAGE UTILIZATION AND ACCOUNT ADMIN
+1.) List all accounts
+2.) Erase the first media message
+3.) equals test
+4.) Quit
+4
+			---END PROGRAM---

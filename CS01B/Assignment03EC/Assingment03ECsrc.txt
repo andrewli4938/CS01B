@@ -1,0 +1,146 @@
+// NOTE: ALL CLASSES ARE WRITTEN IN SEPARATE FILES
+
+// main method
+public class MLSListingsAppEC
+{
+    public static void main(String[] args)
+    {
+        PropertyList clonedPropertyList = null; 
+        PropertyList propertyList = new PropertyList();
+        SingleFamilyHouse prop1 = new SingleFamilyHouse(1000, 10);
+        SingleFamilyHouse prop2 = new SingleFamilyHouse(); 
+        SingleFamilyHouse prop3 = new SingleFamilyHouse(); 
+        
+        propertyList.insert(prop1);
+        propertyList.insert(prop2);
+        propertyList.insert(prop3);
+        
+        try
+        {
+            Property clonedHead = propertyList.getHead().clone();
+            clonedPropertyList = new PropertyList(); 
+            clonedPropertyList.setHead(clonedHead);
+        } catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+        } 
+        System.out.println(propertyList.getAllProperties());
+        System.out.println(clonedPropertyList.getAllProperties());
+    }
+}
+
+
+
+public class Property implements Cloneable
+{
+    private int zipCode;
+    private Property next; 
+    
+    public Property()
+    {
+        next = null; 
+        zipCode = 99999; 
+    }
+    
+    public Property(int zipCode)
+    {
+        this.zipCode = zipCode; 
+    }
+    
+    public String toString()
+    {
+        return String.format("%-10s%-8d","zip code: ", zipCode);
+    }
+    
+    public Property getNext()
+    {
+        return next;
+    }
+    
+    public void setNext(Property next)
+    {
+        this.next = next; 
+    }
+    
+    public Property clone() throws CloneNotSupportedException 
+    {
+        return (Property) super.clone();
+    }
+}
+
+
+
+public class SingleFamilyHouse extends Property implements Cloneable
+{
+    private int backyardArea; 
+    
+    public SingleFamilyHouse()
+    {
+        super(); 
+        backyardArea = 0; 
+    }
+    
+    public SingleFamilyHouse(int zipCode, int backyardArea)
+    {
+        super(zipCode); 
+        this.backyardArea = backyardArea; 
+    }
+    
+    public String toString()
+    {
+        return super.toString() + "Backyard area: "+ backyardArea + "(sqft)" + "\n"; 
+    }
+    
+    public SingleFamilyHouse clone() throws CloneNotSupportedException
+    {
+        return (SingleFamilyHouse) super.clone(); 
+    }
+}
+
+
+import java.awt.List;
+import java.io.*;
+import java.nio.file.*;
+import java.util.ArrayList;
+import java.nio.charset.*;
+
+public class PropertyList
+{
+    private static final String FILE_LOCATION = 
+            "/Users/w.li/eclipse-workspace/CS1B/Assignments/Assignment03/PropertyListText.txt"; 
+    private Property head; 
+    
+    public PropertyList()
+    {
+        head = null; 
+    }
+    
+    public void insert(Property property)
+    {
+        property.setNext(head);
+        head = property;   
+    }
+    
+    public String getAllProperties()
+    {
+        Property property = head;
+        String allProperties = property.toString() + "\n";
+        property = property.getNext(); 
+        while(property != null)
+        {
+            allProperties += property.toString() + "\n";
+            property = property.getNext();
+        }
+        return allProperties;
+    }
+    
+    public Property getHead()
+    {
+        return head; 
+    }
+    
+    public void setHead(Property head)
+    {
+        this.head = head; 
+    }
+}

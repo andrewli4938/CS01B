@@ -1,0 +1,25 @@
+
+TRANSACTION LISTING REPORT
+11/23/2020   Department     Macy's    $22.34     30 day return
+02/20/2016   Department     Sears     $10.23     60 day return
+07/16/2020   Grocery        Costco    $123.67
+12/17/2006   Bank           CASH      $210.00    10.00
+06/17/2019   Grocery        Walmart   $66.55
+05/16/2018   Grocery        Target    $56.13
+04/29/2014   Department     Kohls     $20.89     15 day return
+03/12/2013   Bank           ATM       $525.00    25.00
+
+Total bank charges are: $35.0
+
+Rewards Summary for Andrew Li 1111
+Previous Points Balance                      20.00
++ Points earned on department stores         160.38
++ Points earned on grocery stores            1231.75
+----------------------------------------------------------------
+Total Points Available for Redemption        1392.13
+
+Balance Summary for Andrew Li 1111
+Previous credit card balance                 $10000.00
+- Total money spent                          $999.81
+-----------------------------------------------------
+Current Balance                              $9000.19
